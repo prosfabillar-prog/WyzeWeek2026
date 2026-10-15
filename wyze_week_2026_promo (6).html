@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wyze Week 2026 - Weekly Deals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        wyze: {
+                            blue: '#0055ff',
+                            dark: '#003399',
+                            light: '#e6f0ff',
+                            accent: '#00d2ff'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0055ff; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #003399; 
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- Header / Hero Section -->
+    <header class="text-white py-16 px-4 relative overflow-hidden" style="background-image: url('image_83d995.jpg'); background-size: cover; background-position: center;">
+        <!-- Dark semi-transparent overlay -->
+        <div class="absolute inset-0 bg-gray-900 bg-opacity-70"></div>
+        
+        <!-- Decorative background elements -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none z-0">
+            <svg class="absolute -top-24 -left-24 w-96 h-96 text-white animate-pulse" fill="currentColor" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/></svg>
+            <svg class="absolute top-1/2 right-10 w-64 h-64 text-wyze-accent opacity-50" fill="currentColor" viewBox="0 0 100 100"><polygon points="50,0 100,100 0,100"/></svg>
+        </div>
+
+        <div class="max-w-6xl mx-auto text-center relative z-10">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">WYZE WEEK 2026</h1>
+            <h2 id="page-subtitle" class="text-2xl md:text-3xl font-semibold mb-6 text-wyze-light">Weekly Deals (USA)</h2>
+            
+            <!-- Country Toggle -->
+            <div class="flex justify-center items-center gap-3 mb-8">
+                <span id="label-usa" class="text-white font-bold transition-colors cursor-pointer" onclick="if(currentCountry!=='usa') toggleCountry()">USA</span>
+                <button id="country-toggle" onclick="toggleCountry()" class="relative inline-flex h-7 w-14 items-center rounded-full bg-wyze-blue transition-colors focus:outline-none focus:ring-2 focus:ring-wyze-accent shadow-inner border border-gray-400 border-opacity-30">
+                    <span id="toggle-thumb" class="inline-block h-5 w-5 translate-x-1 transform rounded-full bg-white transition-transform shadow-md"></span>
+                </button>
+                <span id="label-canada" class="text-gray-300 font-medium transition-colors cursor-pointer" onclick="if(currentCountry!=='canada') toggleCountry()">Canada</span>
+            </div>
+            
+            <div class="inline-block glass-effect rounded-2xl p-6 mb-8 shadow-xl">
+                <p class="text-lg md:text-xl font-medium mb-4 flex items-center justify-center gap-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    Start: Sunday Oct 18, 2026 9 am PT &nbsp;|&nbsp; End: Sunday Oct 26, 2026 11:59 pm PT
+                </p>
+                
+                <!-- Countdown Timer -->
+                <div class="flex justify-center gap-4 md:gap-8 mt-6">
+                    <div class="flex flex-col items-center">
+                        <div id="days" class="text-3xl md:text-5xl font-bold bg-white text-wyze-blue rounded-lg w-16 h-16 md:w-24 md:h-24 flex items-center justify-center shadow-lg">00</div>
+                        <span class="text-sm md:text-base mt-2 font-semibold uppercase tracking-wider text-wyze-light">Days</span>
+                    </div>
+                    <div class="text-3xl md:text-5xl font-bold mt-2 md:mt-4">:</div>
+                    <div class="flex flex-col items-center">
+                        <div id="hours" class="text-3xl md:text-5xl font-bold bg-white text-wyze-blue rounded-lg w-16 h-16 md:w-24 md:h-24 flex items-center justify-center shadow-lg">00</div>
+                        <span class="text-sm md:text-base mt-2 font-semibold uppercase tracking-wider text-wyze-light">Hours</span>
+                    </div>
+                    <div class="text-3xl md:text-5xl font-bold mt-2 md:mt-4">:</div>
+                    <div class="flex flex-col items-center">
+                        <div id="minutes" class="text-3xl md:text-5xl font-bold bg-white text-wyze-blue rounded-lg w-16 h-16 md:w-24 md:h-24 flex items-center justify-center shadow-lg">00</div>
+                        <span class="text-sm md:text-base mt-2 font-semibold uppercase tracking-wider text-wyze-light">Mins</span>
+                    </div>
+                    <div class="text-3xl md:text-5xl font-bold mt-2 md:mt-4">:</div>
+                    <div class="flex flex-col items-center">
+                        <div id="seconds" class="text-3xl md:text-5xl font-bold bg-white text-wyze-blue rounded-lg w-16 h-16 md:w-24 md:h-24 flex items-center justify-center shadow-lg">00</div>
+                        <span class="text-sm md:text-base mt-2 font-semibold uppercase tracking-wider text-wyze-light">Secs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 py-12 w-full">
+        
+        <!-- Promotions Section -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold text-gray-900 mb-8 border-b-4 border-wyze-blue inline-block pb-2">Special Promotions</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Free Shipping Card -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-wyze-blue hover:shadow-lg transition-shadow duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="bg-wyze-light p-3 rounded-full text-wyze-blue">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        </div>
+                        <h4 class="text-2xl font-bold text-gray-900">Free Shipping</h4>
+                    </div>
+                    <p class="text-gray-600 mb-2"><span class="font-semibold text-gray-800">Code:</span> No code required</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li>Available for any order size sitewide</li>
+                        <li>Take advantage for multiple orders</li>
+                        <li>Auto-applies at checkout</li>
+                    </ul>
+                </div>
+
+                <!-- Giveaways Card -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-wyze-accent hover:shadow-lg transition-shadow duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="bg-wyze-light p-3 rounded-full text-wyze-blue">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+                        </div>
+                        <h4 class="text-2xl font-bold text-gray-900">Community Giveaways</h4>
+                    </div>
+                    <p class="text-gray-600 mb-2">Week-long giveaways across Wyze Communities (Facebook, Discord, Wyze Forum, and Reddit).</p>
+                    <div class="bg-gray-50 p-3 rounded-lg border border-gray-100 text-sm mt-4">
+                        <p><span class="font-semibold text-gray-800">Contest Open:</span> Mon, Oct 19, 2026 6 am PT - Thu, Oct 22, 2026 9 pm PT</p>
+                        <p class="mt-1"><span class="font-semibold text-gray-800">Winners Announced:</span> Fri, Oct 23, 2026</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Deals Section -->
+        <section>
+            <div class="flex flex-col lg:flex-row justify-between items-center mb-8 border-b-4 border-wyze-blue pb-4 gap-4">
+                <h3 class="text-3xl font-bold text-gray-900 w-full lg:w-auto">Featured Deals</h3>
+                
+                <!-- Search Bar -->
+                <div class="relative w-full lg:w-1/3">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <input type="text" id="search-input" onkeyup="handleSearch(this.value)" class="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-wyze-blue focus:border-wyze-blue outline-none transition-shadow shadow-sm" placeholder="Search for products...">
+                </div>
+                
+                <!-- Filter Buttons -->
+                <div id="type-filters" class="flex bg-gray-200 p-1 rounded-lg transition-opacity duration-300 w-full overflow-x-auto lg:w-auto">
+                    <button onclick="setFilter('weekly')" id="btn-weekly" class="filter-btn whitespace-nowrap px-4 py-2 rounded-md font-semibold text-sm transition-all duration-300 bg-white shadow text-wyze-blue">Weekly Deals</button>
+                    <button onclick="setFilter('daily')" id="btn-daily" class="filter-btn whitespace-nowrap px-4 py-2 rounded-md font-semibold text-sm transition-all duration-300 text-gray-600 hover:text-gray-900">Daily Deals</button>
+                    <button onclick="setFilter('flash')" id="btn-flash" class="filter-btn whitespace-nowrap px-4 py-2 rounded-md font-semibold text-sm transition-all duration-300 text-gray-600 hover:text-gray-900">Flash Sales</button>
+                </div>
+            </div>
+            
+            <!-- Grid Container for Deals -->
+            <div id="deals-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Deal cards will be injected here by JavaScript -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center mt-auto">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-white tracking-widest mb-4">WYZE</h2>
+            <p class="mb-4 text-sm">Make great technology accessible to everyone.</p>
+            <p class="text-xs">&copy; 2026 Wyze Labs, Inc. All rights reserved. Prices and availability subject to change.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Countdown Timer Logic ---
+        // Target Date: Sunday Oct 26, 2026 11:59 pm PT
+        // Note: JavaScript Date parses dates in local time or UTC. We need to specify the timezone offset.
+        // PT is UTC-7 (PDT) in October.
+        const targetDate = new Date('2026-10-26T23:59:00-07:00').getTime();
+
+        const updateTimer = () => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+        };
+
+        setInterval(updateTimer, 1000);
+        updateTimer(); // Initial call
+
+        // --- Deals Data ---
+        const deals = [
+            // Weekly Deals (USA)
+            { name: "Wyze Cam Floodlight Pro", orig: 149.98, sale: 119.98, code: "No code required", details: "Select Wyze Floodlights", category: "Floodlight", type: "weekly", country: "usa", image: "wyze-cam-floodlight-pro-wyze-labs-inc-565701.webp" },
+            { name: "Wyze Cam Floodlight Pro + Mount Bundle", orig: 169.96, sale: 139.98, code: "No code required", details: "Select Wyze Floodlights", category: "Floodlight", type: "weekly", country: "usa", image: "wyze-cam-floodlight-pro-plug-in-mount-wyze-labs-inc-464145.webp" },
+            { name: "Wyze Cam Floodlight v2", orig: 99.98, sale: 79.98, code: "No code required", details: "Select Wyze Floodlights", category: "Floodlight", type: "weekly", country: "usa", image: "wyze-cam-floodlight-v2.webp" },
+            { name: "Wyze Cam Floodlight v2 + Mount Bundle", orig: 119.96, sale: 99.98, code: "No code required", details: "Select Wyze Floodlights", category: "Floodlight", type: "weekly", country: "usa", image: "wyze-cam-floodlight-v2-plug-in-mount-wyze-labs-inc-165465.webp" },
+            { name: "Wyze Battery Video Doorbell", orig: 59.98, sale: 46.98, code: "No code required", details: "", category: "Doorbell", type: "weekly", country: "usa", image: "wyze-battery-video-doorbell-wyze-labs-inc-9627246.webp" },
+            { name: "Wyze Bird Feeder", orig: 39.98, sale: 29.98, code: "No code required", details: "", category: "Outdoor", type: "weekly", country: "usa", image: "wyze-bird-feeder-wyze-labs-inc-9956182.webp" },
+            { name: "Wyze Bulb Cam", orig: 49.98, sale: 40.98, code: "No code required", details: "", category: "Camera", type: "weekly", country: "usa", image: "wyze-bulb-cam-wyze-labs-inc-1103000.webp" },
+            { name: "Wyze Cam Pan v3", orig: 44.98, sale: 37.98, code: "No code required", details: "Applies to the white option only", category: "Camera", type: "weekly", country: "usa", image: "wyze-cam-pan-v3-wyze-labs-inc-4681575.webp" },
+            { name: "Wyze Cam Pan v4", orig: 59.98, sale: 49.98, code: "No code required", details: "", category: "Camera", type: "weekly", country: "usa", image: "wyze-cam-pan-v4-wyze-labs-inc-6982259.webp" },
+            { name: "Wyze Cam v4", orig: 44.98, sale: 37.98, code: "No code required", details: "Applies to all colors", category: "Camera", type: "weekly", country: "usa", image: "wyze-cam-v4-wyze-labs-inc-9066375.webp" },
+            { name: "Wyze Cordless Vacuum S", orig: 193.99, sale: 99.99, code: "No code required", details: "", category: "Home", type: "weekly", country: "usa", image: "wyze-cordless-vacuum-s-wyze-labs-inc-6135393.webp" },
+            { name: "Wyze Duo Cam Doorbell", orig: 119.98, sale: 99.98, code: "No code required", details: "Applies to all colors", category: "Doorbell", type: "weekly", country: "usa", image: "wyze-duo-cam-battery-doorbell-wyze-labs-inc-2491821.webp" },
+            { name: "Wyze Duo Cam Pan", orig: 69.98, sale: 58.98, code: "No code required", details: "", category: "Camera", type: "weekly", country: "usa", image: "wyze-duo-cam-pan-wyze-labs-inc-7172582.webp" },
+            { name: "Wyze Floodlight Cam Plug-in Mount", orig: 19.98, sale: 17.98, code: "No code required", details: "", category: "Accessories", type: "weekly", country: "usa", image: "wyze-cam-floodlight-plug-in-mount-wyze-labs-inc-112642.webp" },
+            { name: "Wyze Lock Bolt v2", orig: 89.98, sale: 79.98, code: "No code required", details: "", category: "Security", type: "weekly", country: "usa", image: "wyze-lock-bolt-v2-wyze-labs-inc-6885193.webp" },
+            { name: "Wyze Palm Lock", orig: 129.98, sale: 113.98, code: "No code required", details: "", category: "Security", type: "weekly", country: "usa", image: "wyze-palm-lock-wyze-labs-inc-8626232.webp" },
+            { name: "Wyze Scale BodyScan", orig: 84.98, sale: 67.98, code: "No code required", details: "Applies to all colors", category: "Health", type: "weekly", country: "usa", image: "wyze-scale-bodyscan-wyze-labs-inc-8197850.webp" },
+            { name: "Wyze Scale S", orig: 29.98, sale: 24.98, code: "No code required", details: "Applies to all colors", category: "Health", type: "weekly", country: "usa", image: "wyze-scale-s-wyze-labs-inc-951906.webp" },
+            { name: "Wyze Scale Ultra", orig: 49.98, sale: 41.98, code: "No code required", details: "Applies to all colors", category: "Health", type: "weekly", country: "usa", image: "wyze-scale-ultra-wyze-labs-inc-5422836.webp" },
+            { name: "Wyze Scale Ultra BodyScan", orig: 119.98, sale: 98.98, code: "No code required", details: "Applies to all colors", category: "Health", type: "weekly", country: "usa", image: "wyze-scale-ultra-bodyscan-wyze-labs-inc-4604872.webp" },
+            { name: "Wyze Scale X", orig: 38.98, sale: 32.98, code: "No code required", details: "Applies to all colors", category: "Health", type: "weekly", country: "usa", image: "wyze-scale-x-wyze-labs-inc-2222951.webp" },
+            { name: "Wyze Scale X Butterfly", orig: 38.98, sale: 32.98, code: "No code required", details: "Applies to all colors", category: "Health", type: "weekly", country: "usa", image: "wyze-scale-x-wyze-labs-inc-3002407.webp" },
+            { name: "Wyze Video Doorbell v2", orig: 59.98, sale: 49.98, code: "No code required", details: "", category: "Doorbell", type: "weekly", country: "usa", image: "wyze-video-doorbell-v2-wyze-labs-inc-2445466.webp" },
+            
+            // Daily Deals & New Launches (USA)
+            { name: "Wyze Scale Ultra BodyScan Plus", orig: null, sale: null, code: "No code required", details: "Mon Oct 19 - New product launch at 9 am PT. Available on wyze.com and Wyze App Shop", category: "Health", type: "daily", country: "usa", image: "wyze-scale-ultra-bodyscan-wyze-labs-inc-4604872.webp" },
+            { name: "Wyze Battery Cam", orig: null, sale: null, code: "No code required", details: "Tue Oct 20 - New product launch at 9 am PT. Available on wyze.com and Wyze App Shop", category: "Camera", type: "daily", country: "usa" },
+            { name: "Wyze Solar Cam", orig: null, sale: null, code: "No code required", details: "Tue Oct 20 - New product launch at 9 am PT. Available on wyze.com and Wyze App Shop", category: "Camera", type: "daily", country: "usa" },
+            { name: "Wyze Bulb Cam Pan Color", orig: null, sale: null, code: "No code required", details: "Thu Oct 22 - New product launch at 9 am PT. Available on wyze.com and Wyze App Shop", category: "Camera", type: "daily", country: "usa" },
+
+            // Flash Sales (USA)
+            { name: "Wyze Plug (2-pack)", orig: 24.98, sale: 16.99, code: "No code required", details: "Mon Oct 19 - Wyze App Shop only. Only available to Wyze Services subscribers", category: "Smart Home", type: "flash", country: "usa", image: "wyze-plug-wyze-labs-inc-3238246.webp" },
+            { name: "Wyze Bulb Color BR30", orig: 27.98, sale: 17.98, code: "No code required", details: "Mon Oct 19 - Wyze App Shop only. Only available to Wyze Services subscribers", category: "Smart Home", type: "flash", country: "usa", image: "wyze-bulb-color-br30-wyze-labs-inc-6257912.webp" },
+            { name: "Wyze Cam Pan v3 (White)", orig: 44.98, sale: 24.98, code: "No code required", details: "Tue Oct 20 - Wyze App Shop only. Applies to the white option", category: "Camera", type: "flash", country: "usa", image: "wyze-cam-pan-v3-wyze-labs-inc-4681575.webp" },
+            { name: "Wyze Cam v4 (White)", orig: 44.98, sale: 24.98, code: "No code required", details: "Wed Oct 21 - Wyze App Shop only. Applies to the white option", category: "Camera", type: "flash", country: "usa", image: "wyze-cam-v4-wyze-labs-inc-9066375.webp" },
+            { name: "Wyze Cam OG", orig: 29.99, sale: 14.99, code: "No code required", details: "Thu Oct 22 - Wyze App Shop only. Applies to white standard version (not Telephoto)", category: "Camera", type: "flash", country: "usa", image: "wyze-cam-og-wyze-labs-inc-9019150.webp" },
+            { name: "Wyze Video Doorbell v2", orig: 59.98, sale: 34.98, code: "No code required", details: "Fri Oct 23 - Wyze App Shop only", category: "Doorbell", type: "flash", country: "usa", image: "wyze-video-doorbell-v2-wyze-labs-inc-2445466.webp" },
+
+            // Weekly Deals (Canada)
+            { name: "Wyze Battery Video Doorbell", orig: 85.98, sale: 67.34, code: "No code required", details: "", category: "Doorbell", type: "weekly", country: "canada", image: "wyze-battery-video-doorbell-wyze-labs-inc-9627246.webp" },
+            { name: "Wyze Bird Feeder", orig: 54.99, sale: 41.23, code: "No code required", details: "", category: "Outdoor", type: "weekly", country: "canada", image: "wyze-bird-feeder-wyze-labs-inc-9956182.webp" },
+            { name: "Wyze Bulb Cam", orig: 64.98, sale: 52.98, code: "No code required", details: "", category: "Camera", type: "weekly", country: "canada", image: "wyze-bulb-cam-wyze-labs-inc-1103000.webp" },
+            { name: "Wyze Cam Floodlight v2", orig: 128.99, sale: 103.19, code: "No code required", details: "Applies to all colors", category: "Floodlight", type: "weekly", country: "canada", image: "wyze-cam-floodlight-v2.webp" },
+            { name: "Wyze Cam Floodlight v2 + Mount Bundle", orig: 158.96, sale: 133.96, code: "No code required", details: "Applies to all colors", category: "Floodlight", type: "weekly", country: "canada", image: "wyze-cam-floodlight-v2-plug-in-mount-wyze-labs-inc-165465.webp" },
+            { name: "Wyze Cam Pan v3", orig: 59.99, sale: 49.98, code: "No code required", details: "Applies to the white option only", category: "Camera", type: "weekly", country: "canada", image: "wyze-cam-pan-v3-wyze-labs-inc-4681575.webp" },
+            { name: "Wyze Cam Pan v4", orig: 69.98, sale: 55.98, code: "No code required", details: "", category: "Camera", type: "weekly", country: "canada", image: "wyze-cam-pan-v4-wyze-labs-inc-6982259.webp" },
+            { name: "Wyze Cam v4", orig: 49.99, sale: 38.98, code: "No code required", details: "Applies to all colors", category: "Camera", type: "weekly", country: "canada", image: "wyze-cam-v4-wyze-labs-inc-9066375.webp" },
+            { name: "Wyze Duo Cam Doorbell", orig: 125.98, sale: 97.98, code: "No code required", details: "Applies to all colors", category: "Doorbell", type: "weekly", country: "canada", image: "wyze-duo-cam-battery-doorbell-wyze-labs-inc-2491821.webp" },
+            { name: "Wyze Duo Cam Pan", orig: 79.98, sale: 64.98, code: "No code required", details: "", category: "Camera", type: "weekly", country: "canada", image: "wyze-duo-cam-pan-wyze-labs-inc-7172582.webp" },
+            { name: "Wyze Floodlight Cam Plug-in Mount", orig: 29.98, sale: 27.98, code: "No code required", details: "", category: "Accessories", type: "weekly", country: "canada", image: "wyze-cam-floodlight-plug-in-mount-wyze-labs-inc-112642.webp" },
+            { name: "Wyze Lock Bolt v2", orig: 125.98, sale: 111.98, code: "No code required", details: "", category: "Security", type: "weekly", country: "canada", image: "wyze-lock-bolt-v2-wyze-labs-inc-6885193.webp" },
+            { name: "Wyze Palm Lock", orig: 179.98, sale: 157.98, code: "No code required", details: "", category: "Security", type: "weekly", country: "canada", image: "wyze-palm-lock-wyze-labs-inc-8626232.webp" },
+            { name: "Wyze Scale BodyScan", orig: 119.98, sale: 95.98, code: "No code required", details: "Applies to all colors", category: "Health", type: "weekly", country: "canada", image: "wyze-scale-bodyscan-wyze-labs-inc-8197850.webp" },
+            { name: "Wyze Scale X Butterfly", orig: 54.99, sale: 46.52, code: "No code required", details: "Applies to all colors", category: "Health", type: "weekly", country: "canada", image: "wyze-scale-x-wyze-labs-inc-3002407.webp" },
+            { name: "Wyze Video Doorbell v2", orig: 59.99, sale: 49.99, code: "No code required", details: "", category: "Doorbell", type: "weekly", country: "canada", image: "wyze-video-doorbell-v2-wyze-labs-inc-2445466.webp" },
+            
+            // Daily Deals & New Launches (Canada)
+            { name: "Wyze Scale Ultra BodyScan Plus", orig: null, sale: null, code: "No code required", details: "Mon Oct 19 - New product launch at 9 am PT", category: "Health", type: "daily", country: "canada", image: "wyze-scale-ultra-bodyscan-wyze-labs-inc-4604872.webp" },
+            { name: "Wyze Battery Cam", orig: null, sale: null, code: "No code required", details: "Tue Oct 20 - New product launch at 9 am PT", category: "Camera", type: "daily", country: "canada" },
+            { name: "Wyze Solar Cam", orig: null, sale: null, code: "No code required", details: "Tue Oct 20 - New product launch at 9 am PT", category: "Camera", type: "daily", country: "canada" },
+            { name: "Wyze Bulb Cam Pan Color", orig: null, sale: null, code: "No code required", details: "Thu Oct 22 - New product launch at 9 am PT", category: "Camera", type: "daily", country: "canada" }
+        ];
+
+        let currentFilter = 'weekly';
+        let currentCountry = 'usa';
+        let searchQuery = '';
+
+        // --- Render Deals ---
+        const dealsGrid = document.getElementById('deals-grid');
+
+        const formatCurrency = (amount) => {
+            if (amount === null) return 'TBA';
+            const currencyCode = currentCountry === 'usa' ? 'USD' : 'CAD';
+            return new Intl.NumberFormat('en-US', { style: 'currency', currency: currencyCode }).format(amount);
+        };
+
+        const renderDeals = () => {
+            dealsGrid.innerHTML = '';
+            
+            const filteredDeals = deals.filter(deal => 
+                deal.type === currentFilter && 
+                deal.country === currentCountry &&
+                deal.name.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+            
+            if (filteredDeals.length === 0) {
+                dealsGrid.innerHTML = `<p class="text-gray-500 col-span-full text-center py-8">No deals found for this category.</p>`;
+                return;
+            }
+
+            filteredDeals.forEach(deal => {
+                let savingsBadge = '';
+                let priceHTML = '';
+
+                if (deal.orig !== null && deal.sale !== null) {
+                    const savings = deal.orig - deal.sale;
+                    const percentOff = Math.round((savings / deal.orig) * 100);
+                    savingsBadge = `
+                        <div class="absolute top-4 right-4 ${deal.type === 'flash' ? 'bg-purple-600' : 'bg-red-500'} text-white text-xs font-bold px-2 py-1 rounded shadow-sm z-10">
+                            Save ${percentOff}%
+                        </div>
+                    `;
+                    priceHTML = `
+                        <div class="flex items-center gap-3 mt-4">
+                            <span class="text-2xl font-extrabold text-wyze-blue">${formatCurrency(deal.sale)}</span>
+                            <span class="text-sm text-gray-400 line-through">${formatCurrency(deal.orig)}</span>
+                        </div>
+                    `;
+                } else {
+                    savingsBadge = `
+                        <div class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded shadow-sm z-10">
+                            NEW
+                        </div>
+                    `;
+                    priceHTML = `
+                        <div class="flex items-center gap-3 mt-4">
+                            <span class="text-xl font-bold text-gray-800">Price Revealed at Launch</span>
+                        </div>
+                    `;
+                }
+
+                const imageHTML = deal.image 
+                    ? `<img src="${deal.image}" alt="${deal.name}" class="w-full h-48 object-contain object-center bg-white border-b border-gray-100 p-4">` 
+                    : '';
+
+                const cardHTML = `
+                    <div class="bg-white rounded-2xl shadow-sm border ${deal.type === 'flash' ? 'border-purple-200' : 'border-gray-200'} overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full group relative">
+                        ${savingsBadge}
+                        ${imageHTML}
+                        <div class="p-6 flex-grow flex flex-col border-b border-gray-100 bg-gradient-to-b from-gray-50 to-white ${deal.image ? 'pt-6' : 'pt-12'}">
+                            <h4 class="text-xl font-bold text-gray-900 leading-tight mb-2 group-hover:text-wyze-blue transition-colors">${deal.name}</h4>
+                            
+                            <div class="mt-auto">
+                                ${priceHTML}
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 p-4 flex-shrink-0">
+                            <div class="text-sm flex flex-col gap-2 min-h-[60px]">
+                                <div class="flex items-start gap-2">
+                                    <svg class="w-4 h-4 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+                                    <span class="text-gray-700 font-medium">${deal.code}</span>
+                                </div>
+                                ${deal.details ? `
+                                <div class="flex items-start gap-2">
+                                    <svg class="w-4 h-4 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span class="text-gray-600 text-xs">${deal.details}</span>
+                                </div>
+                                ` : ''}
+                            </div>
+                            <button class="w-full mt-4 bg-gray-900 hover:bg-wyze-blue text-white font-semibold py-2 rounded-lg transition-colors duration-300 text-sm">
+                                ${deal.type === 'daily' ? 'View Details' : 'Shop Deal'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+                dealsGrid.innerHTML += cardHTML;
+            });
+        };
+
+        // --- Filter Logic ---
+        window.handleSearch = (value) => {
+            searchQuery = value;
+            renderDeals();
+        };
+
+        window.setFilter = (type) => {
+            currentFilter = type;
+            
+            // Update button styles
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'shadow', 'text-wyze-blue');
+                btn.classList.add('text-gray-600');
+            });
+            
+            const activeBtn = document.getElementById(`btn-${type}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-gray-600');
+                activeBtn.classList.add('bg-white', 'shadow', 'text-wyze-blue');
+            }
+
+            renderDeals();
+        };
+
+        window.toggleCountry = () => {
+            const toggleThumb = document.getElementById('toggle-thumb');
+            const labelUsa = document.getElementById('label-usa');
+            const labelCanada = document.getElementById('label-canada');
+            const pageSubtitle = document.getElementById('page-subtitle');
+
+            if (currentCountry === 'usa') {
+                currentCountry = 'canada';
+                // Switch styling to right (Canada)
+                toggleThumb.classList.remove('translate-x-1');
+                toggleThumb.classList.add('translate-x-8');
+                
+                labelUsa.classList.replace('text-white', 'text-gray-300');
+                labelUsa.classList.replace('font-bold', 'font-medium');
+                
+                labelCanada.classList.replace('text-gray-300', 'text-white');
+                labelCanada.classList.replace('font-medium', 'font-bold');
+                
+                pageSubtitle.innerText = 'Weekly Deals (Canada)';
+                
+            } else {
+                currentCountry = 'usa';
+                // Switch styling to left (USA)
+                toggleThumb.classList.remove('translate-x-8');
+                toggleThumb.classList.add('translate-x-1');
+                
+                labelCanada.classList.replace('text-white', 'text-gray-300');
+                labelCanada.classList.replace('font-bold', 'font-medium');
+                
+                labelUsa.classList.replace('text-gray-300', 'text-white');
+                labelUsa.classList.replace('font-medium', 'font-bold');
+                
+                pageSubtitle.innerText = 'Weekly Deals (USA)';
+            }
+            
+            // Reset to weekly deals and clear search when toggling countries
+            document.getElementById('search-input').value = '';
+            searchQuery = '';
+            setFilter('weekly');
+        };
+
+        // Initialize deals rendering
+        renderDeals();
+    </script>
+</body>
+</html>
